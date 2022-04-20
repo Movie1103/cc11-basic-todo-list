@@ -17,7 +17,7 @@ function TodoInput(props) {
 
   return (
     <>
-      <div className="input-group shadow">
+      {/* <div className="input-group shadow">
         <input
           type="text"
           className={`form-control ${todoError ? "is-invalid" : ""}`}
@@ -32,7 +32,39 @@ function TodoInput(props) {
           <i className="fa-solid fa-xmark"></i>
         </Button>
       </div>
-      {todoError && <small className="text-danger">Task is required.</small>}
+      {todoError && <small className="text-danger">Task is required.</small>} */}
+      <form>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email address
+          </label>
+          <input type="email" className="form-control" id="email" />
+          {/* <small className="text-danger">
+          We'll never share your email with anyone else.
+        </small> */}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
+          <input type="text" className="form-control" id="username" />
+          {/* <small className="text-danger">
+          We'll never share your email with anyone else.
+        </small> */}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="phoneNumber" className="form-label">
+            Phone Number
+          </label>
+          <input type="text" className="form-control" id="phoneNumber" />
+          {/* <small className="text-danger">
+          We'll never share your email with anyone else.
+        </small> */}
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
     </>
   );
 }
