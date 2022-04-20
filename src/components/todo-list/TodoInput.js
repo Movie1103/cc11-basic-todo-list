@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../ui/Button";
-// <></> Fragment ~ React.Fragment
+
 function TodoInput(props) {
-  const [todoInput, setTodoInput] = useState("");
+  const [todoInput, setTodoInput] = useState(props.title || "");
   const [todoError, setTodoError] = useState("");
 
   const handleClickCreateBtn = () => {
@@ -14,42 +14,50 @@ function TodoInput(props) {
       setTodoInput("");
     }
   };
-
+  const handleClickUpdateBtn = () => {
+    if (!todoInput) {
+      setTodoError("Title is required.");
+    } else {
+      props.updateTodo({ title: todoInput }, props.id);
+      props.closeEditing();
+    }
+  };
   return (
     <>
-      <form>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input type="email" className="form-control" id="email" />
-          {/* <small className="text-danger">
-          We'll never share your email with anyone else.
-        </small> */}
-        </div>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input type="text" className="form-control" id="username" />
-          {/* <small className="text-danger">
-          We'll never share your email with anyone else.
-        </small> */}
-        </div>
-        <div className="mb-3">
-          <label htmlFor="phoneNumber" className="form-label">
-            Phone Number
-          </label>
-          <input type="text" className="form-control" id="phoneNumber" />
-          {/* <small className="text-danger">
-          We'll never share your email with anyone else.
-        </small> */}
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <div className="input-group shadow">
+        <input
+          type="text"
+          className={`form-control ${todoError ? "is-invalid" : ""}`}
+          placeholder="Enter new todo"
+          value={todoInput}
+          onChange={(event) => setTodoInput(event.target.value)}
+        />
+        {props.id ? (
+          <Button color="primary" onClick={handleClickUpdateBtn}>
+            <i className="fa-solid fa-check "></i>
+          </Button>
+        ) : (
+          <Button color="success" onClick={handleClickCreateBtn}>
+            <i className="fa-solid fa-plus" />
+          </Button>
+        )}
+
+        <Button
+          color="outline-secondary"
+          onClick={() => {
+            if (props.id) {
+              props.closeEditing();
+            } else {
+              setTodoInput("");
+            }
+          }}
+        >
+          <i className="fa-solid fa-xmark" />
+        </Button>
+      </div>
+      {todoError && <small className="text-danger">{todoError}</small>}
     </>
   );
 }
+
 export default TodoInput;

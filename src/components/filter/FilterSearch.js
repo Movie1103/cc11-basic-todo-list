@@ -10,5 +10,4 @@ function FilterSearch() {
     </div>
   );
 }
-
 export default FilterSearch;
