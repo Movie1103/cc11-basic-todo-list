@@ -6,10 +6,10 @@ import TodoList from "./components/todo-list/TodoList";
 import TodoInput from "./components/todo-list/TodoInput";
 import { useState } from "react";
 
-const todo = {
-  title: "Homework",
-  completed: true,
-};
+// const todo = {
+//   title: "Homework",
+//   completed: true,
+// };
 
 const initialTodoList = [
   { title: "Homework", completed: true, id: uuidv4() },
@@ -24,9 +24,10 @@ function App() {
 
   const createTodo = (title) => {
     const newTodo = { title, completed: false, id: uuidv4() };
-    const oldTodoList = [...todoList];
-    oldTodoList.unshift(newTodo);
-    setTodoList(oldTodoList);
+    // const oldTodoList = [...todoList];
+    // oldTodoList.unshift(newTodo);
+    const newTodoList = [newTodo, ...todoList];
+    setTodoList(newTodoList);
   };
 
   return (
